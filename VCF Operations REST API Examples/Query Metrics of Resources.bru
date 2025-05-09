@@ -1,0 +1,11 @@
+meta {
+  name: Query Metrics of Resources
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://{{ServerName}}/suite-api/api/resources/stats/query
+  body: json
+  auth: inherit
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Use Variable
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://{{ServerName}}/suite-api/api/resources?ID={{resourceIds}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ID: {{resourceIds}}
+}

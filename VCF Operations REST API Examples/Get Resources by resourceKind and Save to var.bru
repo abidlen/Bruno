@@ -1,0 +1,29 @@
+meta {
+  name: Get Resources by resourceKind and Save to var
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://{{ServerName}}/suite-api/api/resources?resourceKind=virtualmachine
+  body: none
+  auth: inherit
+}
+
+params:query {
+  resourceKind: virtualmachine
+}
+
+vars:post-response {
+  resourceIds: res('resourceList.identifier')
+  ~jsonData: res['links.rel']
+  ~jsonData: res('links.rel')
+  ~jsonData: res.body.links.rel
+  ~jsonData: res.body.resourceList.resourceKey.name
+}
+
+script:post-response {
+  //const response = res.getBody(); // Get the response body
+  //const jsonData = JSON.parse(response); // Parse the JSON response
+  //bru.setVar('jsonData', JSON.stringify(res.body.resourceList.resourceKey)); // Save the parsed JSON as a string
+}
