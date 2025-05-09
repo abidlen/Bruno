@@ -5,7 +5,19 @@ meta {
 }
 
 post {
-  url: https://{{ServerName}}/suite-api/api/resources/stats/query
-  body: json
+  url: https://{{ServerName}}/suite-api/api/resources/stats/query{{epoch}}
+  body: none
   auth: inherit
+}
+
+vars:pre-request {
+  ~epoch: (new Date()).getTime()
+}
+
+vars:post-response {
+  epoch: (new Date()).getTime()
+}
+
+script:pre-request {
+  //bru.setVar("epoch", (new Date()).getTime() );
 }

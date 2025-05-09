@@ -5,17 +5,13 @@ meta {
 }
 
 get {
-  url: https://{{ServerName}}/suite-api/api/resources?resourceKind=virtualmachine{{epoch}}
-  body: none
+  url: https://{{ServerName}}/suite-api/api/resources?resourceKind=virtualmachine
+  body: json
   auth: inherit
 }
 
 params:query {
-  resourceKind: virtualmachine{{epoch}}
-}
-
-vars:pre-request {
-  epoch: (new Date).getTime()
+  resourceKind: virtualmachine
 }
 
 vars:post-response {
