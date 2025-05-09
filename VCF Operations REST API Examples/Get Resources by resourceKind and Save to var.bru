@@ -5,21 +5,21 @@ meta {
 }
 
 get {
-  url: https://{{ServerName}}/suite-api/api/resources?resourceKind=virtualmachine
+  url: https://{{ServerName}}/suite-api/api/resources?resourceKind=virtualmachine{{epoch}}
   body: none
   auth: inherit
 }
 
 params:query {
-  resourceKind: virtualmachine
+  resourceKind: virtualmachine{{epoch}}
+}
+
+vars:pre-request {
+  epoch: (new Date).getTime()
 }
 
 vars:post-response {
   resourceIds: res('resourceList.identifier')
-  ~jsonData: res['links.rel']
-  ~jsonData: res('links.rel')
-  ~jsonData: res.body.links.rel
-  ~jsonData: res.body.resourceList.resourceKey.name
 }
 
 script:post-response {
