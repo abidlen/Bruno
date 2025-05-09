@@ -1,5 +1,7 @@
 vars {
   ServerName: cm-ops-01.ad.example.net
   UserName: admin
-  Password: {{process.env.ADMIN_PASSWORD}}
 }
+vars:secret [
+  Password
+]
