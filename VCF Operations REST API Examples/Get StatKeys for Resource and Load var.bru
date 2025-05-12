@@ -1,0 +1,29 @@
+meta {
+  name: Get StatKeys for Resource and Load var
+  type: http
+  seq: 5
+}
+
+get {
+  url: https://{{ServerName}}/suite-api/api/resources/{{resourceID}}/statkeys
+  body: json
+  auth: inherit
+}
+
+vars:pre-request {
+  resourceID: 02494315-27a0-4008-a6f4-29e329b21fb7
+}
+
+script:post-response {
+  const response = res.getBody();
+  const jsonData = typeof response === 'string' ? JSON.parse(response) : response;
+  
+  // Extract stat keys and filter for those starting with "CPU"
+  const statKeys = jsonData["stat-key"] || [];
+  const cpuStatKeys = statKeys
+      .filter(item => item.key && item.key.toUpperCase().startsWith("CPU"))
+      .map(item => item.key);
+  
+  // Convert to JSON array string and set as a variable
+  bru.setVar("cpuStatsJSON", JSON.stringify(cpuStatKeys));
+}

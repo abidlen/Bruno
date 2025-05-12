@@ -9,15 +9,3 @@ post {
   body: json
   auth: inherit
 }
-
-vars:pre-request {
-  ~epoch: (new Date()).getTime()
-}
-
-vars:post-response {
-  ~epoch: (new Date()).getTime()
-}
-
-script:pre-request {
-  bru.setVar("epoch", (new Date()).getTime() );
-}
