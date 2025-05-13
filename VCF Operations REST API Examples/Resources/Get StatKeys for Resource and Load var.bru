@@ -1,0 +1,19 @@
+meta {
+  name: Get StatKeys for Resource and Load var
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://{{ServerName}}/suite-api/api/resources/{{resourceID}}/statkeys
+  body: json
+  auth: inherit
+}
+
+vars:pre-request {
+  resourceID: {{resourceIds[0]}}
+}
+
+vars:post-response {
+  cpuStatsJSON: res('stat-key[?].key', i => i.key.toUpperCase().startsWith("CPU"))
+}

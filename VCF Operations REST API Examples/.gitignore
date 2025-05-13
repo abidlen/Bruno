@@ -1,0 +1,5 @@
+# Ignore everything in the /environments folder
+environments/*
+
+# Make an exception for the specific file you want to keep
+!environments/cm-ops-01.ad.example.net.bru

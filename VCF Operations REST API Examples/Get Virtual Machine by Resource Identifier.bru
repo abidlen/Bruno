@@ -1,0 +1,25 @@
+meta {
+  name: Get Virtual Machine by Resource Identifier
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://{{ServerName}}/suite-api/api/resources/query
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "propertyConditions" : {
+        "conditions" : [{
+          "key": "summary|UUID",
+          "operator":"EQ",
+          "stringValue":"02494315-27a0-4008-a6f4-29e329b21fb7"
+        }]
+  
+        
+      }
+  }
+}

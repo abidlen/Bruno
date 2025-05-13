@@ -1,0 +1,39 @@
+meta {
+  name: Query Metrics of Resources
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://{{ServerName}}/suite-api/api/resources/stats/query
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "begin": {{epochPrev24}},
+      "end": {{epoch}},
+      "intervalType": "HOURS",
+      "intervalQuantifier": 1,
+      "rollUpType": "AVG",
+      "resourceId": {{resourceIds}},
+      "statKey": {{cpuStatsJSON}}
+  }
+}
+
+vars:pre-request {
+  ~epoch: (new Date()).getTime()
+}
+
+script:pre-request {
+  // Existing variables for epoch times
+  const currentEpoch = (new Date()).getTime();
+  bru.setVar("epoch", currentEpoch.toString());
+  const epochPrev24 = currentEpoch - (24*60*60*1000);
+  bru.setVar("epochPrev24", epochPrev24.toString());
+}
+
+script:post-response {
+  console.log(bru.getVar("cpuStatsJSON"))
+}
