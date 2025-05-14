@@ -1,0 +1,20 @@
+meta {
+  name: Test-Get Resources by resourceKind and Save to var
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://{{ServerName}}/suite-api/api/resources?resourceKind=virtualmachine
+  body: none
+  auth: inherit
+}
+
+params:query {
+  resourceKind: virtualmachine
+}
+
+vars:post-response {
+  ~resourceIds: res('resourceList.resourceKey.value')
+  ~resourceIds: res('stat-key[?].key', i => i.key.toUpperCase().startsWith("CPU"))
+}

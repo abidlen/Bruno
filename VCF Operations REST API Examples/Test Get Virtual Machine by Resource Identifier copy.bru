@@ -1,7 +1,7 @@
 meta {
-  name: Get Virtual Machine by Resource Identifier
+  name: Test Get Virtual Machine by Resource Identifier copy
   type: http
-  seq: 2
+  seq: 4
 }
 
 post {
@@ -19,6 +19,11 @@ body:json {
           "operator":"EQ",
           //"stringValue":"MGMT"
           "stringValue":"5021022a-e6f2-691d-3e04-79c932245439"
+        },{
+          "key": "summary|ParentCluster",
+          "operator":"EQ",
+          "stringValue":"MGMT"
+          //"stringValue":"5021022a-e6f2-691d-3e04-79c932245439"
         }]
       }
   }
